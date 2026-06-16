@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Ajouter un livre</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-slate-900 to-slate-800 min-h-screen flex items-center justify-center p-8">
+
+  <div class="w-full max-w-lg">
+    <!-- Back -->
+    <a href="/" class="text-slate-400 hover:text-white text-sm mb-6 inline-flex items-center gap-2 transition">
+      ← Retour à la liste
+    </a>
+
+    <div class="bg-slate-800 border border-slate-700 rounded-2xl shadow-2xl p-8">
+      <div class="mb-6">
+        <h1 class="text-3xl font-bold text-white">➕ Ajouter un livre</h1>
+        <p class="text-slate-400 mt-1 text-sm">Remplissez les informations du nouveau livre</p>
+      </div>
+
+      <form method="POST" action="/add" class="space-y-5">
+        <div>
+          <label class="block text-slate-300 text-sm font-semibold mb-2">Titre <span class="text-red-400">*</span></label>
+          <input type="text" name="title" required placeholder="Ex: Le Petit Prince"
+            class="w-full bg-slate-700 border border-slate-600 text-white placeholder-slate-500 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition" />
+        </div>
+
+        <div>
+          <label class="block text-slate-300 text-sm font-semibold mb-2">Auteur <span class="text-red-400">*</span></label>
+          <input type="text" name="author" required placeholder="Ex: Antoine de Saint-Exupéry"
+            class="w-full bg-slate-700 border border-slate-600 text-white placeholder-slate-500 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition" />
+        </div>
+
+        <div>
+          <label class="block text-slate-300 text-sm font-semibold mb-2">Description</label>
+          <textarea name="description" placeholder="Description du livre..." rows="4"
+            class="w-full bg-slate-700 border border-slate-600 text-white placeholder-slate-500 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition resize-none"></textarea>
+        </div>
+
+        <div class="flex gap-3 pt-2">
+          <button type="submit" class="flex-1 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-3 rounded-xl transition duration-200 shadow-lg">
+            ✅ Ajouter le livre
+          </button>
+          <a href="/" class="flex-1 text-center bg-slate-700 hover:bg-slate-600 text-slate-300 font-semibold py-3 rounded-xl transition duration-200">
+            Annuler
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>

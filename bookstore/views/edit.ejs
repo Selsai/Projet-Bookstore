@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Modifier un livre</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-slate-900 to-slate-800 min-h-screen flex items-center justify-center p-8">
+
+  <div class="w-full max-w-lg">
+    <a href="/" class="text-slate-400 hover:text-white text-sm mb-6 inline-flex items-center gap-2 transition">
+      ← Retour à la liste
+    </a>
+
+    <div class="bg-slate-800 border border-slate-700 rounded-2xl shadow-2xl p-8">
+      <div class="mb-6">
+        <h1 class="text-3xl font-bold text-white">✏️ Modifier le livre</h1>
+        <p class="text-slate-400 mt-1 text-sm">Modifiez les informations du livre</p>
+      </div>
+
+      <form method="POST" action="/edit/<%= book.id %>" class="space-y-5">
+        <div>
+          <label class="block text-slate-300 text-sm font-semibold mb-2">Titre <span class="text-red-400">*</span></label>
+          <input type="text" name="title" required value="<%= book.title %>"
+            class="w-full bg-slate-700 border border-slate-600 text-white placeholder-slate-500 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-amber-500 transition" />
+        </div>
+
+        <div>
+          <label class="block text-slate-300 text-sm font-semibold mb-2">Auteur <span class="text-red-400">*</span></label>
+          <input type="text" name="author" required value="<%= book.author %>"
+            class="w-full bg-slate-700 border border-slate-600 text-white placeholder-slate-500 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-amber-500 transition" />
+        </div>
+
+        <div>
+          <label class="block text-slate-300 text-sm font-semibold mb-2">Description</label>
+          <textarea name="description" rows="4"
+            class="w-full bg-slate-700 border border-slate-600 text-white placeholder-slate-500 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-amber-500 transition resize-none"><%= book.description || '' %></textarea>
+        </div>
+
+        <div class="flex gap-3 pt-2">
+          <button type="submit" class="flex-1 bg-amber-500 hover:bg-amber-400 text-white font-semibold py-3 rounded-xl transition duration-200 shadow-lg">
+            💾 Sauvegarder
+          </button>
+          <a href="/" class="flex-1 text-center bg-slate-700 hover:bg-slate-600 text-slate-300 font-semibold py-3 rounded-xl transition duration-200">
+            Annuler
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>

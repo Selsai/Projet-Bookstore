@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Bookstore</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-slate-900 to-slate-800 min-h-screen p-8">
+  <div class="max-w-6xl mx-auto">
+    <!-- Header -->
+    <div class="flex items-center justify-between mb-8">
+      <div>
+        <h1 class="text-4xl font-bold text-white">📚 Bookstore</h1>
+        <p class="text-slate-400 mt-1">Gérez votre bibliothèque en ligne</p>
+      </div>
+      <a href="/add" class="bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-6 py-3 rounded-xl transition duration-200 shadow-lg hover:shadow-indigo-500/30">
+        + Ajouter un livre
+      </a>
+    </div>
+
+    <!-- Stats -->
+    <div class="bg-slate-800 border border-slate-700 rounded-2xl p-4 mb-6 flex items-center gap-3">
+      <span class="text-indigo-400 text-2xl">📖</span>
+      <p class="text-slate-300"><span class="text-white font-bold text-xl"><%= books.length %></span> livre(s) dans la bibliothèque</p>
+    </div>
+
+    <!-- Table -->
+    <div class="bg-slate-800 border border-slate-700 rounded-2xl overflow-hidden shadow-2xl">
+      <table class="w-full">
+        <thead>
+          <tr class="bg-slate-700 text-slate-300 text-sm uppercase tracking-wider">
+            <th class="px-6 py-4 text-left">ID</th>
+            <th class="px-6 py-4 text-left">Titre</th>
+            <th class="px-6 py-4 text-left">Auteur</th>
+            <th class="px-6 py-4 text-left">Description</th>
+            <th class="px-6 py-4 text-center">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if (books.length === 0) { %>
+            <tr>
+              <td colspan="5" class="text-center py-16 text-slate-500">
+                <div class="text-5xl mb-3">📭</div>
+                <p class="text-lg">Aucun livre trouvé</p>
+                <a href="/add" class="text-indigo-400 hover:underline text-sm mt-1 inline-block">Ajouter le premier livre</a>
+              </td>
+            </tr>
+          <% } %>
+          <% books.forEach((book, i) => { %>
+            <tr class="border-t border-slate-700 hover:bg-slate-750 transition duration-150 <%= i % 2 === 0 ? 'bg-slate-800' : 'bg-slate-800/50' %>">
+              <td class="px-6 py-4">
+                <span class="bg-indigo-600/20 text-indigo-400 text-xs font-mono px-2 py-1 rounded">#<%= book.id %></span>
+              </td>
+              <td class="px-6 py-4 text-white font-semibold"><%= book.title %></td>
+              <td class="px-6 py-4 text-slate-300"><%= book.author %></td>
+              <td class="px-6 py-4 text-slate-400 text-sm max-w-xs truncate"><%= book.description || '—' %></td>
+              <td class="px-6 py-4">
+                <div class="flex items-center justify-center gap-2">
+                  <a href="/edit/<%= book.id %>" class="bg-amber-500/20 hover:bg-amber-500/40 text-amber-400 text-sm font-medium px-4 py-2 rounded-lg transition duration-200">
+                    ✏️ Modifier
+                  </a>
+                  <a href="/delete/<%= book.id %>" onclick="return confirm('Supprimer ce livre ?')" class="bg-red-500/20 hover:bg-red-500/40 text-red-400 text-sm font-medium px-4 py-2 rounded-lg transition duration-200">
+                    🗑️ Supprimer
+                  </a>
+                </div>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="text-center text-slate-600 text-sm mt-6">Bookstore App — Microservices LoopBack 4 + Express</p>
+  </div>
+</body>
+</html>

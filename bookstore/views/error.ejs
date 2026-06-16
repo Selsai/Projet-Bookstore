@@ -1,3 +1,42 @@
-<h1><%= message %></h1>
-<h2><%= error.status %></h2>
-<pre><%= error.stack %></pre>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Erreur</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="/styles/main.css">
+</head>
+
+<body>
+
+<div class="max-w-xl mx-auto p-8">
+
+<div class="card p-10 text-center">
+
+<div class="text-6xl mb-4">
+🌧️
+</div>
+
+<h1 class="page-title text-4xl mb-4">
+Une erreur est survenue
+</h1>
+
+<p class="mb-4">
+<%= message %>
+</p>
+
+<p class="text-red-500">
+Code : <%= error.status %>
+</p>
+
+<a href="/" class="btn-primary mt-6">
+🏡 Retour à l'accueil
+</a>
+
+</div>
+
+</div>
+
+</body>
+</html>

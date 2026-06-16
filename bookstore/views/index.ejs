@@ -1,76 +1,368 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Bookstore</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+
+<meta charset="UTF-8">
+
+<title>Bibliothèque</title>
+
+<link rel="stylesheet" href="/styles/main.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
 </head>
-<body class="bg-gradient-to-br from-slate-900 to-slate-800 min-h-screen p-8">
-  <div class="max-w-6xl mx-auto">
-    <!-- Header -->
-    <div class="flex items-center justify-between mb-8">
-      <div>
-        <h1 class="text-4xl font-bold text-white">📚 Bookstore</h1>
-        <p class="text-slate-400 mt-1">Gérez votre bibliothèque en ligne</p>
-      </div>
-      <a href="/add" class="bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-6 py-3 rounded-xl transition duration-200 shadow-lg hover:shadow-indigo-500/30">
-        + Ajouter un livre
-      </a>
-    </div>
 
-    <!-- Stats -->
-    <div class="bg-slate-800 border border-slate-700 rounded-2xl p-4 mb-6 flex items-center gap-3">
-      <span class="text-indigo-400 text-2xl">📖</span>
-      <p class="text-slate-300"><span class="text-white font-bold text-xl"><%= books.length %></span> livre(s) dans la bibliothèque</p>
-    </div>
+<body>
 
-    <!-- Table -->
-    <div class="bg-slate-800 border border-slate-700 rounded-2xl overflow-hidden shadow-2xl">
-      <table class="w-full">
-        <thead>
-          <tr class="bg-slate-700 text-slate-300 text-sm uppercase tracking-wider">
-            <th class="px-6 py-4 text-left">ID</th>
-            <th class="px-6 py-4 text-left">Titre</th>
-            <th class="px-6 py-4 text-left">Auteur</th>
-            <th class="px-6 py-4 text-left">Description</th>
-            <th class="px-6 py-4 text-center">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% if (books.length === 0) { %>
-            <tr>
-              <td colspan="5" class="text-center py-16 text-slate-500">
-                <div class="text-5xl mb-3">📭</div>
-                <p class="text-lg">Aucun livre trouvé</p>
-                <a href="/add" class="text-indigo-400 hover:underline text-sm mt-1 inline-block">Ajouter le premier livre</a>
-              </td>
-            </tr>
-          <% } %>
-          <% books.forEach((book, i) => { %>
-            <tr class="border-t border-slate-700 hover:bg-slate-750 transition duration-150 <%= i % 2 === 0 ? 'bg-slate-800' : 'bg-slate-800/50' %>">
-              <td class="px-6 py-4">
-                <span class="bg-indigo-600/20 text-indigo-400 text-xs font-mono px-2 py-1 rounded">#<%= book.id %></span>
-              </td>
-              <td class="px-6 py-4 text-white font-semibold"><%= book.title %></td>
-              <td class="px-6 py-4 text-slate-300"><%= book.author %></td>
-              <td class="px-6 py-4 text-slate-400 text-sm max-w-xs truncate"><%= book.description || '—' %></td>
-              <td class="px-6 py-4">
-                <div class="flex items-center justify-center gap-2">
-                  <a href="/edit/<%= book.id %>" class="bg-amber-500/20 hover:bg-amber-500/40 text-amber-400 text-sm font-medium px-4 py-2 rounded-lg transition duration-200">
-                    ✏️ Modifier
-                  </a>
-                  <a href="/delete/<%= book.id %>" onclick="return confirm('Supprimer ce livre ?')" class="bg-red-500/20 hover:bg-red-500/40 text-red-400 text-sm font-medium px-4 py-2 rounded-lg transition duration-200">
-                    🗑️ Supprimer
-                  </a>
-                </div>
-              </td>
-            </tr>
-          <% }) %>
-        </tbody>
-      </table>
-    </div>
+<!-- SHAPES -->
 
-    <p class="text-center text-slate-600 text-sm mt-6">Bookstore App — Microservices LoopBack 4 + Express</p>
-  </div>
+<div class="floating-shape shape1"></div>
+<div class="floating-shape shape2"></div>
+<div class="floating-shape shape3"></div>
+
+<div class="container">
+
+<!-- HEADER -->
+
+<div class="top-bar">
+
+<div>
+
+<h1 class="page-title">
+Bibliothèque
+</h1>
+
+<p class="subtitle">
+Votre collection personnelle de livres
+</p>
+
+<div class="poetic-line">
+✿ Des histoires, des émotions, des souvenirs entre les pages ✿
+</div>
+
+</div>
+
+<a href="/add" class="btn-primary">
+<i class="fa-solid fa-plus"></i>
+Ajouter un livre
+</a>
+
+</div>
+
+<!-- STATS -->
+
+<div class="stats-card card">
+
+<div>
+<strong><%= books.length %></strong>
+livre(s)
+</div>
+
+<input
+type="text"
+id="searchBooks"
+placeholder="Rechercher un livre..."
+class="input-field search-input">
+
+</div>
+
+<!-- EMPTY STATE -->
+
+<% if (books.length === 0) { %>
+
+<div class="card empty-state">
+
+<i class="fa-solid fa-book-open empty-icon"></i>
+
+<h2>
+Aucun livre enregistré
+</h2>
+
+<p class="subtitle">
+Commencez votre collection poétique.
+</p>
+
+</div>
+
+<% } %>
+
+<!-- BOOK GRID -->
+
+<div class="book-grid">
+
+<% books.forEach(book => { %>
+
+<div class="book-card searchable">
+
+<div class="book-id">
+ID : <%= book.id %>
+</div>
+
+<h2 class="book-title">
+<%= book.title %>
+</h2>
+
+<p class="book-author">
+<%= book.author %>
+</p>
+
+<p class="book-description">
+<%= book.description || 'Aucune description.' %>
+</p>
+
+<div class="actions">
+
+<a
+href="/edit/<%= book.id %>"
+class="edit-link">
+
+<i class="fa-solid fa-pen"></i>
+Modifier
+
+</a>
+
+<a
+href="/delete/<%= book.id %>"
+class="delete-link delete-btn">
+
+<i class="fa-solid fa-trash"></i>
+Supprimer
+
+</a>
+
+</div>
+
+</div>
+
+<% }) %>
+
+</div>
+
+<!-- QUOTE -->
+
+<div class="quote-box" id="quoteBox"></div>
+
+<!-- FOOTER -->
+
+<div class="footer">
+Bookstore • Express • LoopBack 4 • MongoDB
+</div>
+
+</div>
+
+<!-- MODAL -->
+
+<div class="modal" id="deleteModal">
+
+<div class="modal-content">
+
+<h2 class="modal-title">
+Supprimer ce livre ?
+</h2>
+
+<p class="modal-text">
+Êtes-vous sûr de quitter l’univers Book ?
+</p>
+
+<div class="modal-actions">
+
+<button
+class="btn-secondary"
+id="cancelDelete">
+
+Annuler
+
+</button>
+
+<a
+href="#"
+class="btn-primary"
+id="confirmDelete">
+
+Confirmer
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- TOAST -->
+
+<div class="toast" id="toast">
+Livre supprimé avec succès
+</div>
+
+<!-- SCRIPT -->
+
+<script>
+
+/* =========================
+   MODAL DELETE
+========================= */
+
+const modal = document.getElementById('deleteModal');
+
+const confirmBtn =
+document.getElementById('confirmDelete');
+
+const cancelBtn =
+document.getElementById('cancelDelete');
+
+const toast =
+document.getElementById('toast');
+
+let deleteUrl = '';
+
+document
+.querySelectorAll('.delete-btn')
+.forEach(btn => {
+
+btn.addEventListener('click', function(e){
+
+e.preventDefault();
+
+deleteUrl = this.href;
+
+modal.classList.add('active');
+
+});
+
+});
+
+/* CANCEL */
+
+cancelBtn.addEventListener('click', () => {
+
+modal.classList.remove('active');
+
+});
+
+/* CONFIRM */
+
+confirmBtn.addEventListener('click', function(e){
+
+e.preventDefault();
+
+toast.classList.add('show');
+
+setTimeout(() => {
+
+window.location.href = deleteUrl;
+
+},500);
+
+});
+
+/* =========================
+   SEARCH
+========================= */
+
+const search =
+document.getElementById('searchBooks');
+
+if(search){
+
+search.addEventListener('keyup', () => {
+
+const value =
+search.value.toLowerCase();
+
+document
+.querySelectorAll('.searchable')
+.forEach(card => {
+
+const text =
+card.innerText.toLowerCase();
+
+card.style.display =
+text.includes(value)
+? 'block'
+: 'none';
+
+});
+
+});
+
+}
+
+/* =========================
+   QUOTES
+========================= */
+
+const quotes = [
+
+"Les livres sont des jardins qu'on transporte avec soi.",
+
+"Chaque page tournée est une nouvelle aventure.",
+
+"Les mots ont le pouvoir de faire fleurir l'âme.",
+
+"Lire, c’est rêver les yeux ouverts.",
+
+"Les histoires rendent la vie plus douce."
+
+];
+
+const quoteBox =
+document.getElementById('quoteBox');
+
+if(quoteBox){
+
+quoteBox.innerText =
+quotes[
+Math.floor(
+Math.random() * quotes.length
+)
+];
+
+}
+
+/* =========================
+   PAGE TRANSITION
+========================= */
+
+document
+.querySelectorAll('a')
+.forEach(link => {
+
+link.addEventListener('click', function(e){
+
+if(
+this.classList.contains('delete-btn')
+){
+return;
+}
+
+const href =
+this.getAttribute('href');
+
+if(
+href &&
+!href.startsWith('#')
+){
+
+e.preventDefault();
+
+document.body.style.opacity = '.6';
+
+setTimeout(() => {
+
+window.location = href;
+
+},180);
+
+}
+
+});
+
+});
+
+</script>
+
 </body>
 </html>

@@ -105,7 +105,7 @@ export class BookCrudController {
     },
   })
   async findById(
-    @param.path.number('id') id: number,
+    @param.path.string('id') id: string,
     @param.filter(Book, {exclude: 'where'}) filter?: FilterExcludingWhere<Book>
   ): Promise<Book> {
     return this.bookRepository.findById(id, filter);
@@ -116,7 +116,7 @@ export class BookCrudController {
     description: 'Book PATCH success',
   })
   async updateById(
-    @param.path.number('id') id: number,
+    @param.path.string('id') id: string,
     @requestBody({
       content: {
         'application/json': {
@@ -134,7 +134,7 @@ export class BookCrudController {
     description: 'Book PUT success',
   })
   async replaceById(
-    @param.path.number('id') id: number,
+    @param.path.string('id') id: string,
     @requestBody() book: Book,
   ): Promise<void> {
     await this.bookRepository.replaceById(id, book);
@@ -144,7 +144,7 @@ export class BookCrudController {
   @response(204, {
     description: 'Book DELETE success',
   })
-  async deleteById(@param.path.number('id') id: number): Promise<void> {
+  async deleteById(@param.path.string('id') id: string): Promise<void> {
     await this.bookRepository.deleteById(id);
   }
 }

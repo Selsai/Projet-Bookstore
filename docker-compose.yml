@@ -19,6 +19,15 @@ services:
     environment:
       - MONGO_URL=mongodb://mongo:27017/bookstore
       - HOST=0.0.0.0
+  order-service:
+    build: ./order-service
+    ports:
+      - "3001:3001"
+    depends_on:
+      - mongo
+    environment:
+      - HOST=0.0.0.0
+      - PORT=3001
   mongo:
     image: mongo:4.4
     ports:

@@ -42,7 +42,7 @@ export class BookCrudController {
         },
       },
     })
-    book: Omit<Book, 'number'>,
+    book: Omit<Book, 'id'>,
   ): Promise<Book> {
     return this.bookRepository.create(book);
   }

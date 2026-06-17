@@ -1,113 +1,73 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
-
 <meta charset="UTF-8">
-
-<title>Ajouter un livre</title>
-
+<title>Modifier un livre</title>
 <link rel="stylesheet" href="/styles/main.css">
-
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
 </head>
-
 <body>
-
 <div class="floating-shape shape1"></div>
 <div class="floating-shape shape2"></div>
 <div class="floating-shape shape3"></div>
-
 <div class="container form-container">
-
 <a href="/" class="back-link">
 <i class="fa-solid fa-arrow-left"></i>
 Retour
 </a>
-
 <div class="card form-card">
-
 <h1 class="form-title">
-Ajouter un livre
+Modifier un livre
 </h1>
-
 <p class="form-subtitle">
-Ajoutez un nouvel ouvrage à votre bibliothèque.
+Modifiez les informations de cet ouvrage.
 </p>
-
-<form method="POST" action="/add">
-
+<form method="POST" action="/edit/<%= book.id %>">
 <label>Titre</label>
-
 <input
 type="text"
 name="title"
+value="<%= book.title %>"
 required
 class="input-field">
-
 <label>Auteur</label>
-
 <input
 type="text"
 name="author"
+value="<%= book.author %>"
 required
 class="input-field">
-
 <label>Description</label>
-
 <textarea
 name="description"
 rows="6"
-class="input-field"></textarea>
-
+class="input-field"><%= book.description || '' %></textarea>
 <div class="form-actions">
-
 <button type="submit" class="btn-primary">
 <i class="fa-solid fa-floppy-disk"></i>
 Enregistrer
 </button>
-
 <a href="/" class="btn-secondary">
 Annuler
 </a>
-
 </div>
-
 </form>
-
 </div>
-
 </div>
-
 <script>
-
 document.querySelectorAll('a').forEach(link => {
-
 link.addEventListener('click', function(e){
-
 const href = this.getAttribute('href');
-
 if(href && !href.startsWith('#')){
-
 e.preventDefault();
-
 document.body.style.opacity = '.6';
-
 setTimeout(() => {
-
 window.location = href;
-
 },180);
-
 }
-
 });
-
 });
-
 </script>
-
 </body>
 </html>

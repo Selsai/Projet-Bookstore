@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const axios = require('axios');
 
-const API_URL = 'http://127.0.0.1:3000/books';
+const API_URL = 'http://api:3000/books';
 
 // Liste des livres
 router.get('/', async (req, res) => {
@@ -26,8 +26,13 @@ router.post('/add', async (req, res) => {
     await axios.post(API_URL, req.body);
     res.redirect('/');
   } catch (err) {
-    res.send('Erreur lors de la création');
-  }
+  console.log('CREATE ERROR');
+  console.log(err.response?.data);
+  console.log(err.response?.status);
+  console.log(err.message);
+
+  res.send('Erreur lors de la création');
+}
 });
 
 // Formulaire modification

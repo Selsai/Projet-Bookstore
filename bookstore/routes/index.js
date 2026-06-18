@@ -2,7 +2,8 @@ const express = require('express');
 const router = express.Router();
 const axios = require('axios');
 
-const API_URL = 'http://api:3000/books';
+const API_URL =
+  'http://api-gateway:9001/inventory/books';
 
 // Liste des livres
 router.get('/', async (req, res) => {
